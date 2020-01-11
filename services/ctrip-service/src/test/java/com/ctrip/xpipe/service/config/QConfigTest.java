@@ -14,14 +14,14 @@ import java.io.IOException;
  *
  * Jul 22, 2016
  */
-public class ApolloConfigTest extends AbstractServiceTest{
+public class QConfigTest extends AbstractServiceTest{
 	
 	
 	@Test
 	public void testApollo(){
 		
 		Config config = Config.DEFAULT;
-		Assert.assertTrue(config instanceof ApolloConfig);
+		Assert.assertTrue(config instanceof QConfig);
 
 
 		

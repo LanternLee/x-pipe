@@ -23,20 +23,8 @@ public class XpipeDataSourceProvider implements DataSourceProvider, LogEnabled, 
     private DataSourceProvider m_delegate;
     private org.slf4j.Logger logger = LoggerFactory.getLogger(getClass());
 
-    private static final String apolloDataSourceProviderClass =
-            "com.ctrip.framework.apollo.ds.ApolloDataSourceProvider";
-    private static boolean apolloDataSourceProviderPresent =
-            ClassUtils.isPresent(apolloDataSourceProviderClass, XpipeDataSourceProvider.class.getClassLoader());
-
     @Override
     public void initialize() throws InitializationException {
-        if (apolloDataSourceProviderPresent) {
-            try {
-                m_delegate = (DataSourceProvider)(Class.forName(apolloDataSourceProviderClass).newInstance());
-            } catch (Throwable ex) {
-                m_logger.error("Loading apollo datasource provider failed", ex);
-            }
-        }
         if (m_delegate == null) {
             m_delegate = createDefaultDataSourceProvider();
         }
