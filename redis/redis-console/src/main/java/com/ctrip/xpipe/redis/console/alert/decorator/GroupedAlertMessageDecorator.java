@@ -27,13 +27,13 @@ public class GroupedAlertMessageDecorator extends Decorator {
 
     @Override
     public String doGenerateTitle(AlertEntity alert) {
-        return String.format("[%s][XPipe 报警]%s",
+        return String.format("[%s][XPipe Alert]%s",
                 consoleConfig.getXpipeRuntimeEnvironment(),
                 alert.getKey());
     }
 
     public String generateTitle() {
-        return String.format("[%s][XPipe 报警]",
+        return String.format("[%s][XPipe Alert]",
                 consoleConfig.getXpipeRuntimeEnvironment());
     }
 

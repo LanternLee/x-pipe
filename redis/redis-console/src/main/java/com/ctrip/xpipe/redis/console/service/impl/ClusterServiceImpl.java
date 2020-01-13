@@ -468,7 +468,7 @@ public class ClusterServiceImpl extends AbstractConsoleService<ClusterTblDao> im
 				return Collections.emptyList();
 			}
 
-			String prefix = "健康监测有问题的shard及redis:\n";
+			String prefix = "unhealthy shard and redis:\n";
 
 			Map<String, ClusterListClusterModel> unhealthyClusters = Maps.newHashMap();
 			for(DcMeta dcMeta: xpipeMeta.getDcs().values()) {

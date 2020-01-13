@@ -23,7 +23,7 @@ public enum ALERT_TYPE {
 
         @Override
         public DetailDesc detailDesc() {
-            return new DetailDesc("CRedis中实例故障", "说明：CRedis中实例不可读或不可用");
+            return new DetailDesc("CRedis instance down", "CRedis instance unreadable or unusable");
         }
     },
     QUORUM_DOWN_FAIL("quorum_fail", EMAIL_XPIPE_ADMIN) {
@@ -39,7 +39,7 @@ public enum ALERT_TYPE {
 
         @Override
         public DetailDesc detailDesc() {
-            return new DetailDesc("Quorum Down Fail 错误", "说明：Console会从多个点判断一个redis节点是否挂掉，如果没有达到大多数一致(一部分监测点认为Redis节点挂，另一部分认为OK，可能是网络抖动引起)，则报此错误");
+            return new DetailDesc("Quorum Down Fail", "Quorum Down Fail");
         }
     },
     SENTINEL_RESET("stl_rst", EMAIL_XPIPE_ADMIN) {
@@ -71,7 +71,7 @@ public enum ALERT_TYPE {
 
         @Override
         public DetailDesc detailDesc() {
-            return new DetailDesc("Redis CONF REWRITE", "Redis CONF REWRITE不可用将导致 redis master切换/DR切换失败");
+            return new DetailDesc("Redis CONF REWRITE", "Redis CONF REWRITE unavailable will lead to redis master DR switch fail");
         }
     },
     CLIENT_INCONSIS("client_inconsis", EMAIL_DBA | EMAIL_XPIPE_ADMIN) {
@@ -87,7 +87,7 @@ public enum ALERT_TYPE {
 
         @Override
         public DetailDesc detailDesc() {
-            return new DetailDesc("CRedis | XPipe 数据不一致", "说明：发现CRedis和XPipe信息不一致");
+            return new DetailDesc("CRedis | XPipe Inconsistent", "Inconsistent between CRedis and XPipe");
         }
     },
     MIGRATION_MANY_UNFINISHED("migra_unfinish", EMAIL_XPIPE_ADMIN) {
@@ -103,7 +103,7 @@ public enum ALERT_TYPE {
 
         @Override
         public DetailDesc detailDesc() {
-            return new DetailDesc("存在迁移失败Case", "说明：请查看迁移历史");
+            return new DetailDesc("Found migration fail", "please check migration history");
         }
     },
     XREDIS_VERSION_NOT_VALID("xredis_version_not_valid", EMAIL_DBA) {
@@ -119,7 +119,7 @@ public enum ALERT_TYPE {
 
         @Override
         public DetailDesc detailDesc() {
-            return new DetailDesc("从机房Redis版本错误", "说明：XPipe从机房Redis应该为XRedis，且版本号大于等于0.0.3");
+            return new DetailDesc("redis version not valid in sub dc", "redis in sub dc should be XRedis and version >= 0.0.3");
         }
     },
     REDIS_REPL_DISKLESS_SYNC_ERROR("redis_repl_diskless_sync_error", EMAIL_DBA) {
@@ -135,7 +135,7 @@ public enum ALERT_TYPE {
 
         @Override
         public DetailDesc detailDesc() {
-            return new DetailDesc("Redis配置错误", "说明：Redis配置项repl-diskless-sync在Redis版本2.8.22以下，应该为NO");
+            return new DetailDesc("Redis config error", "repl-diskless-sync should be 'NO' for redis whose version under 2.8.22");
         }
     },
     MARK_INSTANCE_UP("mark instance up", EMAIL_DBA) {
@@ -151,7 +151,7 @@ public enum ALERT_TYPE {
 
         @Override
         public DetailDesc detailDesc() {
-            return new DetailDesc("Instance Mark UP", "说明：从机房Redis实例恢复之后，会将Redis拉入集群");
+            return new DetailDesc("Instance Mark UP", "redis instance will be pull into cluster after recovery");
         }
     },
     MARK_INSTANCE_DOWN("mark instance down", EMAIL_DBA) {
@@ -167,7 +167,7 @@ public enum ALERT_TYPE {
 
         @Override
         public DetailDesc detailDesc() {
-            return new DetailDesc("Instance Mark Down", "说明：从机房Redis健康检测出问题，会将Redis拉出集群");
+            return new DetailDesc("Instance Mark Down", "redis health check fail and will be pull out from cluster");
         }
     },
     ALERT_SYSTEM_OFF("alert system is turning off", EMAIL_DBA | EMAIL_XPIPE_ADMIN) {
@@ -183,7 +183,7 @@ public enum ALERT_TYPE {
 
         @Override
         public DetailDesc detailDesc() {
-            return new DetailDesc("报警系统关闭", "");
+            return new DetailDesc("alert system is turning off", "");
         }
     },
     SENTINEL_AUTO_PROCESS_OFF("sentinel auto process is turning off", EMAIL_DBA | EMAIL_XPIPE_ADMIN) {
@@ -199,7 +199,7 @@ public enum ALERT_TYPE {
 
         @Override
         public DetailDesc detailDesc() {
-            return new DetailDesc("哨兵检测关闭", "");
+            return new DetailDesc("sentinel auto process is turning off", "");
         }
     },
     REPL_BACKLOG_NOT_ACTIVE("repl_backlog_not_active", EMAIL_DBA | EMAIL_XPIPE_ADMIN) {
@@ -215,7 +215,7 @@ public enum ALERT_TYPE {
 
         @Override
         public DetailDesc detailDesc() {
-            return new DetailDesc("Redis Backlog 为空", "Redis依赖Backlog对即将发出的同步数据进行缓存, 没有将会导致全量同步的风险");
+            return new DetailDesc("Redis Backlog is empty", "Redis depend on Backlog to cache data going to sync,  Backlog missing will take risks of full sync");
         }
     },
     SENTINEL_MONITOR_REDUNDANT_REDIS("sentinel_monitors_redundant_redis", EMAIL_XPIPE_ADMIN) {
@@ -231,7 +231,7 @@ public enum ALERT_TYPE {
 
         @Override
         public DetailDesc detailDesc() {
-            return new DetailDesc("Redis哨兵监控到了多余的Redis", "Redis可能不存在于xpipe中");
+            return new DetailDesc("sentinel find redundant redis", "Redis may be not config in XPipe");
         }
     },
     SENTINEL_MONITOR_INCONSIS("sentinel_monitor_incosis", EMAIL_XPIPE_ADMIN) {
@@ -247,7 +247,7 @@ public enum ALERT_TYPE {
 
         @Override
         public DetailDesc detailDesc() {
-            return new DetailDesc("哨兵监控与配置不一致", "");
+            return new DetailDesc("real sentinels inconsistent with config", "");
         }
     },
     INSTANCE_SICK_BUT_DELAY_MARK_DOWN("instance_lag_delay_mark_down", EMAIL_XPIPE_ADMIN | EMAIL_DBA) {
@@ -263,7 +263,7 @@ public enum ALERT_TYPE {
 
         @Override
         public DetailDesc detailDesc() {
-            return new DetailDesc("Redis延迟Mark Down(一般用于跨国站点)", "配置此项的Redis不会立刻拉出, 而是经过一定时间(通常是半小时到1小时)还有问题, 再将其拉出集群");
+            return new DetailDesc("instance_lag_delay_mark_down(usually in site oversea)", "the redis will not be pull out immediately, but be pull out since keep on down for a long time(usually half/one hour)");
         }
     },
     MIGRATION_SYSTEM_CHECK_OVER_DUE("migration_system_not_checked", EMAIL_XPIPE_ADMIN) {
@@ -279,7 +279,7 @@ public enum ALERT_TYPE {
 
         @Override
         public DetailDesc detailDesc() {
-            return new DetailDesc("DR迁移检测系统停止工作", "针对DR迁移系统的检测工作长时间停止, 则会报出此信息");
+            return new DetailDesc("DR migration system check fail", "DR migration system has been unavailable for a long time");
         }
     };
 

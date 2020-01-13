@@ -57,7 +57,7 @@ public class DefaultRedisClient extends AbstractObservable implements RedisClien
 		this.redisKeeperServer = redisKeeperServer;
 		
 		this.channel = channel;
-		String remoteIpLocalPort = ChannelUtil.getRemoteAddr(channel);
+		ChannelUtil.getRemoteAddr(channel);
 		channel.closeFuture().addListener(new ChannelFutureListener() {
 			
 			@Override

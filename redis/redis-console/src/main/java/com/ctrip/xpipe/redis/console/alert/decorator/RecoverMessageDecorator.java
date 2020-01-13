@@ -22,14 +22,14 @@ public class RecoverMessageDecorator extends GroupedAlertMessageDecorator {
 
     @Override
     public String doGenerateTitle(AlertEntity alert) {
-        return String.format("[%s][XPipe 恢复]%s",
+        return String.format("[%s][XPipe Recovery]%s",
                 consoleConfig.getXpipeRuntimeEnvironment(),
                 alert.getKey());
     }
 
     @Override
     public String generateTitle() {
-        return String.format("[%s][XPipe 恢复]",
+        return String.format("[%s][XPipe Recovery]",
                 consoleConfig.getXpipeRuntimeEnvironment());
     }
 }

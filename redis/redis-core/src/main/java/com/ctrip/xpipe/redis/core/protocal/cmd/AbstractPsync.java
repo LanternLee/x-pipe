@@ -148,16 +148,15 @@ public abstract class AbstractPsync extends AbstractRedisCommand<Object> impleme
 					future().setSuccess();
 				}
 				endReadRdb();
-			} else {
-				break;
+				if (saveCommands) {
+					tryAppendCommands(byteBuf);
+				}
 			}
+
+			break;
 		case READING_COMMANDS:
 			if (saveCommands) {
-				try {
-					appendCommands(byteBuf);
-				} catch (IOException e) {
-					logger.error("[doHandleResponse][write commands error]" + this, e);
-				}
+				tryAppendCommands(byteBuf);
 			}
 			break;
 		default:
@@ -165,6 +164,14 @@ public abstract class AbstractPsync extends AbstractRedisCommand<Object> impleme
 		}
 
 		return null;
+	}
+
+	private void tryAppendCommands(ByteBuf byteBuf) {
+		try {
+			appendCommands(byteBuf);
+		} catch (IOException e) {
+			logger.error("[doHandleResponse][write commands error]" + this, e);
+		}
 	}
 
 	protected void handleRedisResponse(Channel channel, String psync) throws IOException {
